@@ -1,6 +1,6 @@
 <h1 align="center">
   <br>
-  <a href="https://github.com/megumikato"><img src="https://raw.githubusercontent.com/megumikato/megumikato.jpg"></a>
+  <a href="https://github.com/megumikato"><img src="https://raw.githubusercontent.com/megumikato/megumikato.png"></a>
   <br>
   MEGUMI KATO
  <br>
@@ -39,6 +39,9 @@ after running it you need to scan the qr
 
 | Command       |                Feature           |
 | :-----------: | :--------------------------------: |
+|  #apakah      | Kerang Ajaib                     |
+|  #rate        | Kerang Ajaib                     |
+|  #kapankah    | Kerang Ajaib                     |
 |  #sticker     | Sticker Creator                  |
 |  #botstat     | Bot status                       |
 |  #gifsticker  |Animated sticker using giphy url |
