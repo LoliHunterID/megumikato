@@ -1,8 +1,8 @@
 <h1 align="center">
   <br>
-  <a href="https://github.com/shansekai/Sansekai-BOT"><img src="https://raw.githubusercontent.com/shansekai/Sansekai-BOT/master/anime/original.jpg"></a>
+  <a href="https://github.com/megumikato"><img src="https://raw.githubusercontent.com/megumikato/megumikato.jpg"></a>
   <br>
-  Sansekai BOT Whatsapp
+  MEGUMI KATO
  <br>
   </h1>
 
@@ -93,5 +93,6 @@ Fix Stuck on linux, install google chrome stable:
 <ul>
 <li>https://github.com/open-wa/wa-automate-nodejs<br>
 <li>https://github.com/YogaSakti/imageToSticker<br>
-<li>https://github.com/MhankBarBar/whatsapp-bot
+<li>https://github.com/MhankBarBar/whatsapp-bot<br>
+<li>https://github.com/shansekai
 </li>
