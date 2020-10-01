@@ -1,6 +1,6 @@
 <h1 align="center">
   <br>
-  <a href="https://github.com/megumikato"><img src="https://raw.githubusercontent.com/megumikato/megumikato.png"></a>
+  <a href="https://github.com/megumikato"><img src="https://raw.githubusercontent.com/megumikato/anime/megumikato.png"></a>
   <br>
   MEGUMI KATO
  <br>
