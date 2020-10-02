@@ -134,3 +134,6 @@
 [1002/074222.631:ERROR:file_io_win.cc(162)] CreateFile C:\Users\Lenovo\AppData\Local\Temp\puppeteer_dev_chrome_profile-ReSovx\Crashpad\settings.dat: The system cannot find the path specified. (0x3)
 [1002/074222.632:ERROR:file_io_win.cc(171)] CreateFile C:\Users\Lenovo\AppData\Local\Temp\puppeteer_dev_chrome_profile-ReSovx\Crashpad\reports\32a0bfa4-5640-4de5-b67f-f6d63cc40086.dmp: The system cannot find the path specified. (0x3)
 [1002/074222.632:ERROR:crash_report_exception_handler.cc(97)] PrepareNewCrashReport failed
+[1002/080716.606:ERROR:file_io_win.cc(162)] CreateFile C:\Users\Lenovo\AppData\Local\Temp\puppeteer_dev_chrome_profile-lSdHeK\Crashpad\settings.dat: The system cannot find the path specified. (0x3)
+[1002/080716.606:ERROR:file_io_win.cc(171)] CreateFile C:\Users\Lenovo\AppData\Local\Temp\puppeteer_dev_chrome_profile-lSdHeK\Crashpad\reports\5e48bbf3-1227-4a3a-b456-a29ee9e7230b.dmp: The system cannot find the path specified. (0x3)
+[1002/080716.606:ERROR:crash_report_exception_handler.cc(97)] PrepareNewCrashReport failed
