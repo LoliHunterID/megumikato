@@ -74,12 +74,13 @@ after running it you need to scan the qr
 |#tiktok        | Tiktok video downloader |
 | #twt          | Twitter image/video downloader|
 | #fb           | Facebook video downloader|
-|   #promote     |   Promote User (grup only)                  |
-|#demote         |   Demote User (grup only)                 |
-|#kick           |   Kick User (grup only)                   |
-|#del            |   Delete bot message (grup only)           |
-|#tagall         |   Tag All Member Group (grup only)        |
-|#kickall        | Kick All member (grup only)  |
+|   #promote     |   Promote User (admin group only)                  |
+|#demote         |   Demote User (admin group only)                 |
+|#kick           |   Kick User (admin group only)                   |
+|#del            |   Delete bot message (admin group only)           |
+|#tagall         |   Tag All Member Group (admin group only)        |
+|#kickall        | Kick All member (admin group only)  |
+|#linkgroup         |   Link Group (admin group only)                 |
 |#bc             | Broadcast text (owner bot only) |
 |#leaveall       | Leave all grup (owner bot only) |
 |#clearall       | Clear All chat bot (owner bot only) |
