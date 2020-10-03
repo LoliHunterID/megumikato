@@ -137,3 +137,14 @@
 [1002/080716.606:ERROR:file_io_win.cc(162)] CreateFile C:\Users\Lenovo\AppData\Local\Temp\puppeteer_dev_chrome_profile-lSdHeK\Crashpad\settings.dat: The system cannot find the path specified. (0x3)
 [1002/080716.606:ERROR:file_io_win.cc(171)] CreateFile C:\Users\Lenovo\AppData\Local\Temp\puppeteer_dev_chrome_profile-lSdHeK\Crashpad\reports\5e48bbf3-1227-4a3a-b456-a29ee9e7230b.dmp: The system cannot find the path specified. (0x3)
 [1002/080716.606:ERROR:crash_report_exception_handler.cc(97)] PrepareNewCrashReport failed
+[1003/063515.709:ERROR:file_io_win.cc(162)] CreateFile C:\Users\Lenovo\AppData\Local\Temp\puppeteer_dev_chrome_profile-v14lFY\Crashpad\settings.dat: The system cannot find the path specified. (0x3)
+[1003/063515.739:ERROR:file_io_win.cc(171)] CreateFile C:\Users\Lenovo\AppData\Local\Temp\puppeteer_dev_chrome_profile-v14lFY\Crashpad\reports\7047ca4b-16ab-4b6a-a3ed-f9a6c45eef0a.dmp: The system cannot find the path specified. (0x3)
+[1003/063515.739:ERROR:crash_report_exception_handler.cc(97)] PrepareNewCrashReport failed
+[1003/065500.499:ERROR:process_reader_win.cc(151)] SuspendThread: Access is denied. (0x5)
+[1003/065500.511:ERROR:file_io_win.cc(162)] CreateFile C:\Users\Lenovo\AppData\Local\Temp\puppeteer_dev_chrome_profile-YjCMTo\Crashpad\settings.dat: The system cannot find the path specified. (0x3)
+[1003/065500.511:ERROR:file_io_win.cc(171)] CreateFile C:\Users\Lenovo\AppData\Local\Temp\puppeteer_dev_chrome_profile-YjCMTo\Crashpad\reports\af7216a6-d6a7-4595-bddf-cccfed83a9bd.dmp: The system cannot find the path specified. (0x3)
+[1003/065500.511:ERROR:crash_report_exception_handler.cc(97)] PrepareNewCrashReport failed
+[1003/070505.666:ERROR:process_reader_win.cc(151)] SuspendThread: Access is denied. (0x5)
+[1003/070505.713:ERROR:file_io_win.cc(162)] CreateFile C:\Users\Lenovo\AppData\Local\Temp\puppeteer_dev_chrome_profile-9EGBLr\Crashpad\settings.dat: The system cannot find the path specified. (0x3)
+[1003/070505.713:ERROR:file_io_win.cc(171)] CreateFile C:\Users\Lenovo\AppData\Local\Temp\puppeteer_dev_chrome_profile-9EGBLr\Crashpad\reports\dbb50e71-09e8-445d-b9f6-f9415111ba79.dmp: The system cannot find the path specified. (0x3)
+[1003/070505.713:ERROR:crash_report_exception_handler.cc(97)] PrepareNewCrashReport failed
