@@ -148,3 +148,13 @@
 [1003/070505.713:ERROR:file_io_win.cc(162)] CreateFile C:\Users\Lenovo\AppData\Local\Temp\puppeteer_dev_chrome_profile-9EGBLr\Crashpad\settings.dat: The system cannot find the path specified. (0x3)
 [1003/070505.713:ERROR:file_io_win.cc(171)] CreateFile C:\Users\Lenovo\AppData\Local\Temp\puppeteer_dev_chrome_profile-9EGBLr\Crashpad\reports\dbb50e71-09e8-445d-b9f6-f9415111ba79.dmp: The system cannot find the path specified. (0x3)
 [1003/070505.713:ERROR:crash_report_exception_handler.cc(97)] PrepareNewCrashReport failed
+[1003/081005.427:ERROR:process_reader_win.cc(151)] SuspendThread: Access is denied. (0x5)
+[1003/081005.427:ERROR:process_reader_win.cc(151)] SuspendThread: Access is denied. (0x5)
+[1003/081005.427:ERROR:process_reader_win.cc(151)] SuspendThread: Access is denied. (0x5)
+[1003/081005.427:ERROR:process_reader_win.cc(151)] SuspendThread: Access is denied. (0x5)
+[1003/081005.427:ERROR:process_reader_win.cc(151)] SuspendThread: Access is denied. (0x5)
+[1003/081005.427:ERROR:process_reader_win.cc(151)] SuspendThread: Access is denied. (0x5)
+[1003/081005.427:ERROR:process_reader_win.cc(151)] SuspendThread: Access is denied. (0x5)
+[1003/081005.435:ERROR:file_io_win.cc(162)] CreateFile C:\Users\Lenovo\AppData\Local\Temp\puppeteer_dev_chrome_profile-1cYF2V\Crashpad\settings.dat: The system cannot find the path specified. (0x3)
+[1003/081005.435:ERROR:file_io_win.cc(171)] CreateFile C:\Users\Lenovo\AppData\Local\Temp\puppeteer_dev_chrome_profile-1cYF2V\Crashpad\reports\f2815d30-1493-47ec-a522-3e705c470295.dmp: The system cannot find the path specified. (0x3)
+[1003/081005.435:ERROR:crash_report_exception_handler.cc(97)] PrepareNewCrashReport failed
