@@ -7,6 +7,7 @@ const { msgFilter, color, processTime, isUrl } = require('../../utils')
 const axios = require('axios')
 const os = require('os')
 const fs = require('fs-extra')
+const { spawn } = require('child_process')
 const get = require('got')
 const { liriklagu, quotemaker, randomNimek, fb, sleep, jadwalTv } = require('../../lib/functions')
 const quotedd = require('../../lib/quote')
@@ -121,8 +122,9 @@ module.exports = msgHandler = async (client = new Client(), message) => {
 
         switch (command) {
         // Menu and TnC
-         case 'statusbot':
+        case 'statusbot':
         case 'botstat':
+        case 'speed':
         case 'server':
         case 'ping':
             const loadedMsg = await client.getAmountOfLoadedMessages()
@@ -234,7 +236,7 @@ module.exports = msgHandler = async (client = new Client(), message) => {
         case 'ytmp3':
                 if (args.length !== 1) return client.reply(from, 'Maaf, format pesan salah silahkan periksa menu. [Wrong Format]', id)
                 if (!isUrl(url) & !url.includes('youtube.com') || !url.includes('youtu.be')) return client.reply(from, 'Maaf, link yang kamu kirim tidak valid. [Invalid Link]', id)
-                client.reply(from, '_Mohon tunggu sebentar_\n\n*NOTE : KALAU DOWNLOAD LEBIH DARI 10 MENIT GAK USAH PAKAI BOT YA, KARENA DAPAT MEMBUAT BOT OVERLOAD.*\n\nSupport Bot Kami Agar Tetap Aktif Dengan Cara Donasi Ke:\nDana: 081283468899\nOVO: 081283468899\nGOPAY: 081283468899\nPULSA TELKOMSEL: 081283468899\n\n*Menerima donasi berapapun jumlahnya 🙏 Terima Kasih.*', id)
+                client.reply(from, '_Scraping Metadata..._\n\nUntuk Donasi Ketik *#donasi*', id)
                 axios.get('https://mhankbarbar.herokuapp.com/api/yta?url=' + url)
                 .then(async function (response) {
                     console.log('Get metadata from => ' + args[0])
@@ -335,7 +337,7 @@ module.exports = msgHandler = async (client = new Client(), message) => {
         case 'twitter':
             if (args.length !== 1) return client.reply(from, 'Maaf, format pesan salah silahkan periksa menu. [Wrong Format]', id)
             if (!isUrl(url) & !url.includes('twitter.com') || url.includes('t.co')) return client.reply(from, 'Maaf, url yang kamu kirim tidak valid. [Invalid Link]', id)
-            await client.reply(from, `_Scraping Metadata..._ \n\nSupport Bot Kami Agar Tetap Aktif Dengan Cara Donasi Ke:\nDana: 081283468899\nOVO: 081283468899\nGOPAY: 081283468899\nPULSA TELKOMSEL: 081283468899\n\n*Menerima donasi berapapun jumlahnya 🙏 Terima Kasih.*`, id)
+            await client.reply(from, `_Scraping Metadata..._ \n\nSupport Bot Kami Agar Tetap Aktif Dengan Cara #donasi`, id)
             downloader.tweet(url).then(async (data) => {
                 if (data.type === 'video') {
                     const content = data.variants.filter(x => x.content_type !== 'application/x-mpegURL').sort((a, b) => b.bitrate - a.bitrate)
@@ -353,6 +355,39 @@ module.exports = msgHandler = async (client = new Client(), message) => {
                 }
             })
                 .catch(() => client.sendText(from, 'Maaf, link tidak valid atau tidak ada media di link yang kamu kirim. [Invalid Link]'))
+            break
+        case 'infogempa':
+            const bmkg = await get.get('https://mhankbarbar.herokuapp.com/api/infogempa').json()
+            const { lokasi, kedalaman, magnitude, potensi, map, status, koordinat, waktu } = bmkg
+            const hasil = `INFORMASI GEMPA *BMKG*\n\n➸ *Lokasi* : ${lokasi}\n➸ *Waktu* : ${waktu}\\n➸ *Koordinat* : ${koordinat}\n➸ *Magnitude* : ${magnitude}\n➸ *Kedalaman* : ${kedalaman}\n➸ *Potensi* : ${potensi}\n➸ *Status* : ${status}\n`
+            await client.reply(from, hasil, id)
+            client.sendImage(from, map, id)
+            break
+        case 'nulis':
+            if (args.length !== 1) return client.reply(from, 'Maaf, format pesan salah silahkan periksa menu. [Wrong Format]', id)
+            const text = body.slice(7)
+            await client.reply(from, `_Scraping Metadata..._ \n\nSupport Bot Kami Agar Tetap Aktif Dengan Cara #donasi`, id)
+            const splitText = text.replace(/(\S+\s*){1,10}/g, '$&\n')
+            const fixHeight = splitText.split('\n').slice(0, 25).join('\n')
+            spawn('convert', [
+                './anime/before.jpg',
+                '-font',
+                'Indie-Flower',
+                '-size',
+                '700x960',
+                '-pointsize',
+                '25',
+                '-interline-spacing',
+                '1',
+                '-annotate',
+                '+170+222',
+                fixHeight,
+                './anime/after.jpg'
+            ])
+            .on('error', () => client.reply(from, 'Error', id))
+            .on('exit', () => {
+                client.sendImage(from, './anime/after.jpg', 'nulis.jpg', 'BOT NULIS', id)
+            })
             break
         case 'fb':
         case 'facebook':
@@ -478,6 +513,16 @@ module.exports = msgHandler = async (client = new Client(), message) => {
                     }))
                 }
                 break
+         case 'cuaca':
+            if (args.length !== 1) return client.reply(from, 'Maaf, format pesan salah silahkan periksa menu. [Wrong Format]', id)
+            const tempat = body.slice(7)
+            const weather = await get.get('https://mhankbarbar.herokuapp.com/api/cuaca?q='+ tempat).json()
+            if (weather.error) {
+                await client.reply(from, weather.error, id)
+            } else {
+                await client.reply(from, `➸ Tempat : ${weather.result.tempat}\n\n➸ Angin : ${weather.result.angin}\n➸ Cuaca : ${weather.result.cuaca}\n➸ Deskripsi : ${weather.result.desk}\n➸ Kelembapan : ${weather.result.kelembapan}\n➸ Suhu : ${weather.result.suhu}\n➸ Udara : ${weather.result.udara}`, id)
+            }
+            break
         case 'tts':
          if (!isGroupMsg) return client.reply(from, 'Perintah ini hanya bisa di gunakan dalam group!\nSilahkan invite ke grup terlebih dahulu', message.id)
             if (args.length == 0) return client.reply(from, 'Kirim perintah *#tts* [id, en, jp, ar, ru, ko] [teks], contoh *#tts* id halo semua')
@@ -569,8 +614,8 @@ module.exports = msgHandler = async (client = new Client(), message) => {
                 const _zone = zone == 'green' ? 'Hijau* (Aman) \n' : zone == 'yellow' ? 'Kuning* (Waspada) \n' : 'Merah* (Bahaya) \n'
                 data += `${i + 1}. Kel. *${region}* Berstatus *Zona ${_zone}`
             }
-            const text = `*CEK LOKASI PENYEBARAN COVID-19*\nHasil pemeriksaan dari lokasi yang anda kirim adalah *${zoneStatus.status}* ${zoneStatus.optional}\n\nInformasi lokasi terdampak disekitar anda:\n${data}`
-            client.sendText(from, text)
+            const loct = `*CEK LOKASI PENYEBARAN COVID-19*\nHasil pemeriksaan dari lokasi yang anda kirim adalah *${zoneStatus.status}* ${zoneStatus.optional}\n\nInformasi lokasi terdampak disekitar anda:\n${data}`
+            client.sendText(from, loct)
             break
         case 'wait':
             if (isMedia) {
@@ -636,11 +681,7 @@ module.exports = msgHandler = async (client = new Client(), message) => {
             break
         // Group Commands (group admin only)
         case 'kickall':
-            if (!isGroupMsg) return await client.reply(from, 'Perintah ini hanya bisa di gunakan dalam group!', id)
-            isGroupOwner = sender.id === chat.groupMetadata.owner
-            if (!isGroupAdmins) return client.reply(from, 'Gagal, perintah ini hanya dapat digunakan oleh admin grup! [Admin Group Only]', id)
-            if (!isGroupOwner) return await client.reply(from, 'Perintah ini hanya bisa di gunakan oleh Owner group', id)
-            if (!isBotGroupAdmins) return await client.reply(from, 'Perintah ini hanya bisa di gunakan ketika bot menjadi admin', id)
+            if(!isOwner) return client.reply(from, 'Perintah ini hanya untuk owner bot!', message.id)
             const allMem = await client.getGroupMembers(groupId)
             for (let i = 0; i < allMem.length; i++) {
                 if (groupAdmins.includes(allMem[i].id)) {
@@ -650,6 +691,16 @@ module.exports = msgHandler = async (client = new Client(), message) => {
                 }
             }
             await client.reply(from, 'Success kick semua member grup!', id)
+            break
+        case 'linkgroup':
+            if (!isGroupAdmins) return await client.reply(from, 'Gagal, perintah ini hanya dapat digunakan oleh admin grup! [Admin Group Only]', id)
+            if (!isBotGroupAdmins) return await client.reply(from, 'Gagal, silahkan tambahkan bot sebagai admin grup! [Bot Not Admin]', id)
+            if (isGroupMsg) {
+                const inviteLink = await client.getGroupInviteLink(groupId);
+                client.sendLinkWithAutoPreview(from, `Nama : *${name}*\nLink : `, inviteLink)
+            } else {
+                await client.reply(from, 'Maaf, perintah ini hanya dapat dipakai didalam grup! [Group Only]', id)
+            }
             break
         case 'kick':
             if (!isGroupMsg) return client.reply(from, 'Maaf, perintah ini hanya dapat dipakai didalam grup! [Group Only]', id)
@@ -683,6 +734,21 @@ module.exports = msgHandler = async (client = new Client(), message) => {
             await client.demoteParticipant(groupId, mentionedJidList[0])
             await client.sendTextWithMentions(from, `Request diterima, menghapus jabatan @${mentionedJidList[0].replace('@c.us', '')}.`)
             break
+        case 'join':
+            if(!isOwner) return client.reply(from, 'Perintah ini hanya untuk owner bot!', id)
+            if (args.length === 1) return await client.reply(from, 'Kirim perintah *!join* linkgroup\n\nEx:\n!join https://chat.whatsapp.com/blablablablablabla', id)
+            const link = body.slice(6)
+            const minMem =5
+            const isLink = link.match(/(https:\/\/chat.whatsapp.com)/gi)
+            const check = await client.inviteInfo(link)
+            if (!isLink) return await client.reply(from, 'Maaf, format pesan salah silahkan periksa menu. [Wrong Format]', id)
+            if (check.size < minMem) return await client.reply(from, 'Member group tidak melebihi 5, bot tidak bisa masuk', id)
+            if (check.status === 200) {
+                await client.joinGroupViaLink(link).then(() => client.reply(from, 'Bot akan segera masuk!'))
+            } else {
+                await client.reply(from, 'Link group tidak valid!', id)
+            }
+            break
         case 'add':
             if(!isGroupMsg) return client.reply(from, 'Fitur ini hanya bisa di gunakan dalam group', message.id)
             if(args.length == 0) return client.reply(from, 'Untuk menggunakan fitur ini, kirim perintah *#add* 628xxxxx', message.id)
@@ -713,7 +779,7 @@ module.exports = msgHandler = async (client = new Client(), message) => {
             if (!quotedMsgObj.fromMe) return client.reply(from, 'Maaf, format pesan salah silahkan periksa menu. [Wrong Format]', id)
             client.deleteMessage(quotedMsgObj.chatId, quotedMsgObj.id, false)
             break
-       case 'tagall':
+        case 'tagall':
             if (!isGroupMsg) return client.reply(from, 'Maaf, perintah ini hanya dapat dipakai didalam grup! [Group Only]', id)
             if (!isGroupAdmins) return client.reply(from, 'Gagal, perintah ini hanya dapat digunakan oleh admin grup! [Admin Group Only]', id)
             const mentions = mentionList(sender.id, botNumber, groupMembers)
@@ -1035,7 +1101,21 @@ break
                 client.reply(from, 'Usage: \n!quotemaker |teks|watermark|theme\n\nEx :\n!quotemaker |ini contoh|bicit|random', message.id)
             }
             break*/
-            
+        case 'quotemaker':
+            arg = body.trim().split('|')
+            if (arg.length >= 4) {
+                await client.reply(from, 'Maaf, format pesan salah silahkan periksa menu. [Wrong Format]', id)
+                const quotes = arg[1]
+                const author = arg[2]
+                const theme = arg[3]
+                await quotemaker(quotes, author, theme).then(amsu => {
+                    client.sendFile(from, amsu, 'quotesmaker.jpg','neh...').then(cih => console.log(cih)).catch(err => {
+                       client.reply(from, mess.error.Qm, id)
+                    })
+                })
+            } else {
+                await client.reply(from, 'Usage: \n!quotemaker |teks|watermark|theme\n\nEx :\n!quotemaker |ini contoh|bicit|random', id)
+            }
             // NSFW MENU //
             case 'randomhentai':
             const hentai = await randomNimek('hentai')
