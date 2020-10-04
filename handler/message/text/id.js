@@ -80,7 +80,7 @@ Hai kak ${pushname}
    ┠❥ *#demote @tagadmin*
    ┠❥ *#tagall*
    ┠❥ *#adminlist*
-   ┠❥ *#linkgroupt*
+   ┠❥ *#linkgroup*
    ┠❥ *#ownergrup*
    ┠❥ *#bye*
    ┠❥ *#del [replyChatBot]*
@@ -96,10 +96,10 @@ Hai kak ${pushname}
       ┷┯
     ┯┷ ☾ KERANG COMMANDS ☽
     ╽
-    ┠❥ *#ask* [optional]*
+    ┠❥ *#ask [optional]*
     ┠❥ *#apakah [optional]*
-    ┠❥ *#rate* [optional]*
-    ┠❥ *#bisakah* [optional]*
+    ┠❥ *#rate [optional]*
+    ┠❥ *#bisakah [optional]*
     ╿
     ┷┯ ☾ OWNER COMMANDS ☽
       ╿
