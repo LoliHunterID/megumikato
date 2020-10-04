@@ -29,13 +29,14 @@ Hai kak ${pushname}
 ┠❥ MEGUMI BOT
 ┠❥ 2.0
 ┠❥ CREATOR : TOBZ
+┠❥ wa.me/081311850715
 ╿
-┷┯ ☾ COMMANDS ☽
+┷┯ ☾ OTHER COMMANDS ☽
    ╽ 
    ┠❥ *#iklan*
    ┠❥ *#rules*
    ┠❥ *#server*
-   ┠❥ *#sticker*
+   ┠❥ *#sticker [reply]*
    ┠❥ *#gifsticker [link giphy only]*
    ┠❥ *#neko*
    ┠❥ *#pokemon*
@@ -49,6 +50,7 @@ Hai kak ${pushname}
    ┠❥ *#ceklokasi [kirim lokasi lalu reply]*
    ┠❥ *#resi [nama kurir]*
    ┠❥ *#tts [kode bhs] [teks]*
+   ┠❥ *#quotemaker |text|creator|theme*
    ┠❥ *#waifu*
    ┠❥ *#husbu*
    ┠❥ *#ptl*
@@ -58,7 +60,7 @@ Hai kak ${pushname}
    ┠❥ *#rmeme*
    ┠❥ *#quotes*
    ┠❥ *#qanime*
-   ┠❥ *#wait*
+   ┠❥ *#wait [reply]*
    ┠❥ *#lirik [optional]*
    ╿
 ┯┷ ☾ DOWNLOADER COMMANDS ☽
@@ -77,11 +79,11 @@ Hai kak ${pushname}
    ┠❥ *#promote @tagmember*
    ┠❥ *#demote @tagadmin*
    ┠❥ *#tagall*
-   ┠❥ *#adminList*
+   ┠❥ *#adminlist*
+   ┠❥ *#linkgroupt*
    ┠❥ *#ownergrup*
    ┠❥ *#bye*
    ┠❥ *#del [replyChatBot]*
-   ┠❥ *#kickAll*
    ╿
    ┷┯  ☾ ANIME COMMANDS ☽
       ╽
@@ -105,6 +107,7 @@ Hai kak ${pushname}
       ┠❥ *#leaveall*
       ┠❥ *#clearall*
       ┠❥ *#listblock*
+      ┠❥ *#kickall*
       ╿
       ╰╼❥ MADE BY TOBZ`
 }
