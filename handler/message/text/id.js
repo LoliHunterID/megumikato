@@ -157,7 +157,7 @@ mengambil link group
 
 ➥ *#kickAll*
 Mengeluarkan semua member group!
-*Note* : Admin group tidak terkena kick`)
+*Note* : Admin group tidak terkena kick)`
 }
 
 exports.textDonasi = (pushname) => {
