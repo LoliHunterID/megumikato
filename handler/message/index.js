@@ -26,7 +26,7 @@ const kapankah = [
     '1 Tahun lagi'
 ]
 
-const nilai = [
+const rate = [
     '100',
     '90',
     '80',
@@ -147,8 +147,11 @@ module.exports = msgHandler = async (client = new Client(), message) => {
         case 'readme':
             await client.sendText(from, menuId.textReadme(pushname))
             break
-        case 'jadwalbdp':
-            await client.sendText(from, menuId.textMapel(pushname))
+        case 'listdaerah':
+            await client.sendText(from, menuId.textDaerah(pushname))
+            break
+        case 'listchannel':
+            await client.sendText(from, menuId.textChannel(pushname))
             break
         case 'menu':
         case 'help':
@@ -617,6 +620,29 @@ module.exports = msgHandler = async (client = new Client(), message) => {
             const loct = `*CEK LOKASI PENYEBARAN COVID-19*\nHasil pemeriksaan dari lokasi yang anda kirim adalah *${zoneStatus.status}* ${zoneStatus.optional}\n\nInformasi lokasi terdampak disekitar anda:\n${data}`
             client.sendText(from, loct)
             break
+        case 'jadwaltv':
+            if (args.length === 1) return await client.reply(from, 'Kirim perintah *jadwalTv [channel]*\nUntuk melihat channel ketik *#listchannel*', id)
+            const query = body.slice(10).toLowerCase()
+            const jadwal = await jadwalTv(query)
+            await client.reply(from, jadwal, id)
+            break
+        case 'jadwaltvnow':
+            const jadwalNow = await get.get('https://api.haipbis.xyz/jadwaltvnow').json()
+            await client.reply(from, `Jam : ${jadwalNow.jam}\n\nJadwalTV : ${jadwalNow.jadwalTV}`, id)
+            break
+        case 'jadwalshalat':
+            if (args.length === 1) return await client.reply(from, '[ ERROR ] Kirim perintah *jadwalShalat [daerah]*\ncontoh : *jadwalShalat Tangerang*\nUntuk list daerah kirim perintah *listdaerah*')
+            const daerah = body.slice(14)
+            const jadwalShalat = await get.get(`https://mhankbarbar.herokuapp.com/api/jadwalshalat?daerah=${daerah}`).json()
+            if (jadwalShalat.error) return await client.reply(from, jadwalShalat.error, id)
+            const { Imsyak, Subuh, Dhuha, Dzuhur, Ashar, Maghrib, Isya } = await jadwalShalat
+            arrbulan = ["Januari","Februari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember"];
+            tgl = new Date().getDate()
+            bln = new Date().getMonth()
+            thn = new Date().getFullYear()
+            const resultJadwal = `Jadwal shalat di ${daerah}, ${tgl}-${arrbulan[bln]}-${thn}\n\nImsyak : ${Imsyak}\nSubuh : ${Subuh}\nDhuha : ${Dhuha}\nDzuhur : ${Dzuhur}\nAshar : ${Ashar}\nMaghrib : ${Maghrib}\nIsya : ${Isya}`
+            await client.reply(from, resultJadwal, id)
+            break
         case 'wait':
             if (isMedia) {
                 const fetch = require('node-fetch')
@@ -681,7 +707,11 @@ module.exports = msgHandler = async (client = new Client(), message) => {
             break
         // Group Commands (group admin only)
         case 'kickall':
-            if(!isOwner) return client.reply(from, 'Perintah ini hanya untuk owner bot!', message.id)
+            if (!isOwner) return client.reply(from, 'Perintah special untuk owner bot', id)
+            if (!isGroupMsg) return await client.reply(from, 'Perintah ini hanya bisa di gunakan dalam group!', id)
+            const isGroupOwner = sender.id === chat.groupMetadata.owner
+            if (!isGroupOwner) return await client.reply(from, 'Perintah ini hanya bisa di gunakan oleh Owner group', id)
+            if (!isBotGroupAdmins) return await client.reply(from, 'Perintah ini hanya bisa di gunakan ketika bot menjadi admin', id)
             const allMem = await client.getGroupMembers(groupId)
             for (let i = 0; i < allMem.length; i++) {
                 if (groupAdmins.includes(allMem[i].id)) {
@@ -693,16 +723,18 @@ module.exports = msgHandler = async (client = new Client(), message) => {
             await client.reply(from, 'Success kick semua member grup!', id)
             break
         case 'linkgroup':
+            if (!isOwner) return client.reply(from, 'Perintah special untuk owner bot', id)
             if (!isGroupAdmins) return await client.reply(from, 'Gagal, perintah ini hanya dapat digunakan oleh admin grup! [Admin Group Only]', id)
             if (!isBotGroupAdmins) return await client.reply(from, 'Gagal, silahkan tambahkan bot sebagai admin grup! [Bot Not Admin]', id)
             if (isGroupMsg) {
                 const inviteLink = await client.getGroupInviteLink(groupId);
-                client.sendLinkWithAutoPreview(from, `Nama : *${name}*\nLink : `, inviteLink)
+                client.sendLinkWithAutoPreview(from, inviteLink, `\nNama Group : *${name}*`)
             } else {
                 await client.reply(from, 'Maaf, perintah ini hanya dapat dipakai didalam grup! [Group Only]', id)
             }
             break
         case 'kick':
+            if (!isOwner) return client.reply(from, 'Perintah special untuk owner bot', id)
             if (!isGroupMsg) return client.reply(from, 'Maaf, perintah ini hanya dapat dipakai didalam grup! [Group Only]', id)
             if (!isGroupAdmins) return client.reply(from, 'Gagal, perintah ini hanya dapat digunakan oleh admin grup! [Admin Group Only]', id)
             if (!isBotGroupAdmins) return client.reply(from, 'Gagal, silahkan tambahkan bot sebagai admin grup! [Bot Not Admin]', id)
@@ -715,6 +747,7 @@ module.exports = msgHandler = async (client = new Client(), message) => {
             }
             break
         case 'promote':
+            if (!isOwner) return client.reply(from, 'Perintah special untuk owner bot', id)
             if (!isGroupMsg) return await client.reply(from, 'Maaf, perintah ini hanya dapat dipakai didalam grup! [Group Only]', id)
             if (!isGroupAdmins) return await client.reply(from, 'Gagal, perintah ini hanya dapat digunakan oleh admin grup! [Admin Group Only]', id)
             if (!isBotGroupAdmins) return await client.reply(from, 'Gagal, silahkan tambahkan bot sebagai admin grup! [Bot not Admin]', id)
@@ -725,6 +758,7 @@ module.exports = msgHandler = async (client = new Client(), message) => {
             await client.sendTextWithMentions(from, `Request diterima, menambahkan @${mentionedJidList[0].replace('@c.us', '')} sebagai admin.`)
             break
         case 'demote':
+            if (!isOwner) return client.reply(from, 'Perintah special untuk owner bot', id)
             if (!isGroupMsg) return client.reply(from, 'Maaf, perintah ini hanya dapat dipakai didalam grup! [Group Only]', id)
             if (!isGroupAdmins) return client.reply(from, 'Gagal, perintah ini hanya dapat digunakan oleh admin grup! [Admin Group Only]', id)
             if (!isBotGroupAdmins) return client.reply(from, 'Gagal, silahkan tambahkan bot sebagai admin grup! [Bot not Admin]', id)
@@ -736,9 +770,9 @@ module.exports = msgHandler = async (client = new Client(), message) => {
             break
         case 'join':
             if(!isOwner) return client.reply(from, 'Perintah ini hanya untuk owner bot!', id)
-            if (args.length === 1) return await client.reply(from, 'Kirim perintah *!join* linkgroup\n\nEx:\n!join https://chat.whatsapp.com/blablablablablabla', id)
+            if (args.length === 1) return await client.reply(from, 'Kirim perintah *#join* linkgroup\n\nEx:\n!join https://chat.whatsapp.com/blablablablablabla', id)
             const link = body.slice(6)
-            const minMem =5
+            const minMem = 5
             const isLink = link.match(/(https:\/\/chat.whatsapp.com)/gi)
             const check = await client.inviteInfo(link)
             if (!isLink) return await client.reply(from, 'Maaf, format pesan salah silahkan periksa menu. [Wrong Format]', id)
@@ -750,10 +784,11 @@ module.exports = msgHandler = async (client = new Client(), message) => {
             }
             break
         case 'add':
-            if(!isGroupMsg) return client.reply(from, 'Fitur ini hanya bisa di gunakan dalam group', message.id)
-            if(args.length == 0) return client.reply(from, 'Untuk menggunakan fitur ini, kirim perintah *#add* 628xxxxx', message.id)
-            if(!isGroupAdmins) return client.reply(from, 'Perintah ini hanya bisa di gunakan oleh admin group', message.id)
-            if(!isBotGroupAdmins) return client.reply(from, 'Perintah ini hanya bisa di gunakan ketika bot menjadi admin', message.id)
+            if (!isGroupMsg) return client.reply(from, 'Fitur ini hanya bisa di gunakan dalam group', message.id)
+            if (args.length == 0) return client.reply(from, 'Untuk menggunakan fitur ini, kirim perintah *#add* 628xxxxx', message.id)
+            if (!isOwner) return client.reply(from, 'Perintah special untuk owner bot', message.id)
+            if (!isGroupAdmins) return client.reply(from, 'Perintah ini hanya bisa di gunakan oleh admin group', message.id)
+            if (!isBotGroupAdmins) return client.reply(from, 'Perintah ini hanya bisa di gunakan ketika bot menjadi admin', message.id)
             try {
                 await client.addParticipant(from,`${body.slice(5)}@c.us`)
             } catch {
@@ -924,7 +959,7 @@ module.exports = msgHandler = async (client = new Client(), message) => {
                             })
                         }
             break
-        /*case 'igstalk':
+        case 'igstalk':
                         if(!args.lenght >= 2) return
                         if(!args[1]) return
                         let usrname = args[1]
@@ -990,38 +1025,9 @@ _*Processing Sukses Sansekai BOT*_`
                             );
                             browser.close();
                             });
-        break*/
-     /*case 'fanart': {
-const cheerio = require('cheerio');
-const request = require('request');
+        break
 
-const { exec } = require("child_process");
-request.get({
-  headers: {'content-type' : 'application/x-www-form-urlencoded'},
-  url:     'https://api.computerfreaker.cf/v1/anime',
- 
-},function(error, response, body){
-    let $ = cheerio.load(body);
-    var d = JSON.parse(body);
-console.log(d.url); 
-exec('wget "' + d.url + '" -O anime/nime.jpg', (error, stdout, stderr) => {
-client.sendFile(from, './anime/nime.jpg', 'nime.jpg', 'Hai kak', message.id)
-
-    if (error) {
-        console.log(`error: ${error.message}`);
-        return;
-    }
-    if (stderr) {
-        console.log(`stderr: ${stderr}`);
-        return;
-    }
-
-    console.log(`stdout: ${stdout}`);
-});
-});
-}
-break
-case 'fanart18': {
+/*case 'fanart18': {
 const cheerio = require('cheerio');
 const request = require('request');
 
@@ -1050,7 +1056,7 @@ client.sendFile(from, './anime/ok.jpg', 'ok.jpg', 'Hai kak', message.id)
 });
 });
 }
-break
+break*/
           case 'brainly':
             if (args.length >= 1){
                 const BrainlySearch = require('../../lib/brainly')
@@ -1077,30 +1083,6 @@ break
                 client.reply(from, 'Usage :\n!brainly [pertanyaan] [.jumlah]\n\nEx : \n!brainly NKRI .2', message.id)
             }
             break
-            case 'wall':
-            if (args.length == 0) return client.reply(from, 'Kirim perintah *!wall [query]*', id)
-            const query = body.slice(6)
-            const walls = await wall(query)
-            console.log(walls)
-            await client.sendImageFromUrl(from, walls, 'walls.jpg', '', id)
-            break
-        case 'quotemaker':
-            arg = body.trim().split('|')
-            if (arg.length >= 3) {
-                client.reply(from, 'Tunggu yaa, sedang proses . . .', message.id) 
-                const quotes = arg[1]
-                const author = arg[2]
-                const theme = arg[3]
-                try {
-                    const resolt = await quotemaker(quotes, author, theme)
-                    client.sendFile(from, resolt, 'quotesmaker.jpg','neh...')
-                } catch {
-                    client.reply(from, 'Maaf quotesmaker gagal di proses:(', message.id)
-                }
-            } else {
-                client.reply(from, 'Usage: \n!quotemaker |teks|watermark|theme\n\nEx :\n!quotemaker |ini contoh|bicit|random', message.id)
-            }
-            break*/
         case 'quotemaker':
             arg = body.trim().split('|')
             if (arg.length >= 4) {
