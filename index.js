@@ -55,6 +55,10 @@ const start = (client = new Client()) => {
         if (event.action === 'add') client.sendTextWithMentions(event.chat, `Hello, Welcome to the group @${event.who.replace('@c.us', '')} \n\nHave fun with us✨\n\n*Megumi Kato*✨`)
     })
 
+    client.onGlobalParicipantsChanged((event) => {
+        if (event.action === 'remove') client.sendTextWithMentions(event.chat, `Goodbye, Kakak @${event.who.replace('@c.us', '')} \n\n*Megumi Kato*✨`)
+    })
+
     client.onIncomingCall((callData) => {
         // client.contactBlock(callData.peerJid)
     })
