@@ -62,11 +62,6 @@ Hai kak ${pushname}
    ┠❥ *#qanime*
    ┠❥ *#wait [reply]*
    ┠❥ *#lirik [optional]*
-   ┠❥ *#jadwalshalat [optional]*
-   ┠❥ *#listdaerah*
-   ┠❥ *#jadwaltvnow*
-   ┠❥ *#jadwaltv [optional]*
-   ┠❥ *#listchannel*
    ╿
 ┯┷ ☾ DOWNLOADER COMMANDS ☽
 ╽
