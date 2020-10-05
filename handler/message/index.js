@@ -798,6 +798,7 @@ module.exports = msgHandler = async (client = new Client(), message) => {
         case 'bye':
             if (!isGroupMsg) return client.reply(from, 'Maaf, perintah ini hanya dapat dipakai didalam grup! [Group Only]', id)
             if (!isGroupAdmins) return client.reply(from, 'Gagal, perintah ini hanya dapat digunakan oleh admin grup! [Admin Group Only]', id)
+            if (!isOwner) return client.reply(from, 'Perintah special untuk owner bot', id)
             client.sendText(from, 'Good bye... ( ⇀‸↼‶ )').then(() => client.leaveGroup(groupId))
             break
         case 'listblock':
@@ -1056,7 +1057,7 @@ client.sendFile(from, './anime/ok.jpg', 'ok.jpg', 'Hai kak', message.id)
 });
 });
 }
-break*/
+break
           case 'brainly':
             if (args.length >= 1){
                 const BrainlySearch = require('../../lib/brainly')
@@ -1098,8 +1099,14 @@ break*/
             } else {
                 await client.reply(from, 'Usage: \n!quotemaker |teks|watermark|theme\n\nEx :\n!quotemaker |ini contoh|bicit|random', id)
             }
+            */
+            // JADWAL TV MENU //
+        case 'jadwaltv antv':
+            const antv = await jadwalTv('antv')
+            client.reply(from, `Jadwal TV ANTV\n${ext}`, id)
+            break
             // NSFW MENU //
-            case 'randomhentai':
+        case 'randomhentai':
             const hentai = await randomNimek('hentai')
             if (hentai.endsWith('.png')) {
                 var ext = '.png'
