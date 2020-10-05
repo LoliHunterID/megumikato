@@ -121,6 +121,7 @@ exports.textDaerah = () => {
     return `
 Untuk Melihat List Daerah Harap Masuk Link Ini!!
 https://pastebin.com/raw/z7cXr3Uu
+`
 }
 
 exports.textAdmin = () => {
