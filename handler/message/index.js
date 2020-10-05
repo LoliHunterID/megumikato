@@ -620,16 +620,14 @@ module.exports = msgHandler = async (client = new Client(), message) => {
             const loct = `*CEK LOKASI PENYEBARAN COVID-19*\nHasil pemeriksaan dari lokasi yang anda kirim adalah *${zoneStatus.status}* ${zoneStatus.optional}\n\nInformasi lokasi terdampak disekitar anda:\n${data}`
             client.sendText(from, loct)
             break
+        /*
         case 'jadwaltv':
             if (args.length === 1) return await client.reply(from, 'Kirim perintah *jadwalTv [channel]*\nUntuk melihat channel ketik *#listchannel*', id)
             const query = body.slice(10).toLowerCase()
             const jadwal = await jadwalTv(query)
             await client.reply(from, jadwal, id)
             break
-        case 'jadwaltvnow':
-            const jadwalNow = await get.get('https://api.haipbis.xyz/jadwaltvnow').json()
-            await client.reply(from, `Jam : ${jadwalNow.jam}\n\nJadwalTV : ${jadwalNow.jadwalTV}`, id)
-            break
+            */
         case 'jadwalshalat':
             if (args.length === 1) return await client.reply(from, '[ ERROR ] Kirim perintah *jadwalShalat [daerah]*\ncontoh : *jadwalShalat Tangerang*\nUntuk list daerah kirim perintah *listdaerah*')
             const daerah = body.slice(14)
