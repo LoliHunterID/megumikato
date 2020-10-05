@@ -62,6 +62,11 @@ Hai kak ${pushname}
    ┠❥ *#qanime*
    ┠❥ *#wait [reply]*
    ┠❥ *#lirik [optional]*
+   ┠❥ *#jadwalshalat [optional]*
+   ┠❥ *#listdaerah*
+   ┠❥ *#jadwaltvnow*
+   ┠❥ *#jadwaltv [optional]*
+   ┠❥ *#listchannel*
    ╿
 ┯┷ ☾ DOWNLOADER COMMANDS ☽
 ╽
@@ -80,9 +85,10 @@ Hai kak ${pushname}
    ┠❥ *#demote @tagadmin*
    ┠❥ *#tagall*
    ┠❥ *#adminlist*
-   ┠❥ *#linkgroup*
+   ┠❥ *#linkgroupt*
    ┠❥ *#ownergrup*
    ┠❥ *#bye*
+   ┠❥ *#kickall*
    ┠❥ *#del [replyChatBot]*
    ╿
    ┷┯  ☾ ANIME COMMANDS ☽
@@ -96,10 +102,10 @@ Hai kak ${pushname}
       ┷┯
     ┯┷ ☾ KERANG COMMANDS ☽
     ╽
-    ┠❥ *#ask [optional]*
+    ┠❥ *#ask* [optional]*
     ┠❥ *#apakah [optional]*
-    ┠❥ *#rate [optional]*
-    ┠❥ *#bisakah [optional]*
+    ┠❥ *#rate* [optional]*
+    ┠❥ *#bisakah* [optional]*
     ╿
     ┷┯ ☾ OWNER COMMANDS ☽
       ╿
@@ -107,9 +113,14 @@ Hai kak ${pushname}
       ┠❥ *#leaveall*
       ┠❥ *#clearall*
       ┠❥ *#listblock*
-      ┠❥ *#kickall*
       ╿
       ╰╼❥ MADE BY TOBZ`
+}
+
+exports.textDaerah = () => {
+    return `
+Untuk Melihat List Daerah Harap Masuk Link Ini!!
+https://pastebin.com/raw/z7cXr3Uu
 }
 
 exports.textAdmin = () => {
@@ -140,9 +151,12 @@ Mention semua member group termasuk admin
 ➥ *#del*
 menghapus pesan bot (balas pesan bot dengan #del)
 
+➥ *#linkgroup*
+mengambil link group
+
 ➥ *#kickAll*
 Mengeluarkan semua member group!
-*Note* : Admin group tidak terkena kick)`
+*Note* : Admin group tidak terkena kick`)
 }
 
 exports.textDonasi = (pushname) => {
@@ -155,44 +169,6 @@ Pulsa: 081311850715
 Paypal : tobyprogamers@gmail.com
 
 *Menerima donasi berapapun jumlahnya 🙏 Terima Kasih.*`
-}
-
-exports.textMapel = (pushname) => {
-    return `
-Hai Kak ${pushname}, Selamat datang di Mata Pelajaran XI BDP
-
-Jadwal Pelajaran XI - BDP
-
- *Senin*
-06:30 - 07:30 Matematika (Drs. Suyatno)
- ISTIRAHAT 07:30-08:00 
-08:30 - 09:00 Bahasa Indonesia (Efriyanni)
- ISTIRAHAT 09:00-09:30 
-09:30 - 10:30 Bisnis Online (Prihandoko, S. Pd)
-
- *Selasa*
-06:30 - 07:30 Kewirausahaan (Drs. M Sahab Siregar)
- ISTIRAHAT 07:30-08:00 
-08:30 - 09:00 Administrasi Transaksi (Prihandoko, S. Pd)
- ISTIRAHAT 09:00-09:30
-09:30 - 10:30 Bahasa Inggris (Siti Khamidah, S. Pd)
-
- *Rabu*
-06:30 - 07:30 Agama (Agung Ismail, M. Pd)
- ISTIRAHAT 07:30-08:00 
-08:30 - 09:00 Penataan Produk (Hj. Indah Susi Asih, S. Pd, M. M)
-
- *Kamis*
-06:30 - 07:30 PPKN (Jimmy, S. Pd)
- ISTIRAHAT 07:30-08:00 
-08:30 - 09:00 PJOK (Titien Soerjaningsih, M. Pd)
- ISTIRAHAT 09:00-09:30
-09:30 - 10:30 BISNIS ONLINE (Prihandoko, S. Pd)
-
- *Jum'at*
-06:30 - 07:30 Pengelolaan Bisnis Ritel (Hj. Indah Susi Asih, S. Pd, M. M) 
- ISTIRAHAT 07:30-08:00 
-08:30 - 09:00 BK (Sangsang Sangbakti, M. Pd)`
 }
 
 exports.textRules = () => {
@@ -208,6 +184,23 @@ Bot Akan Memblokir Kamu Atau Keluar Dari Grup Yang Kamu Kelola.
 
 Rules ini untuk kenyamanan semua yang memakai
 bot ini `
+}
+
+exports.textChannel = (pushname) => {
+    return `Daftar channel: 
+1. ANTV
+2. GTV
+3. Indosiar
+4. iNewsTV
+5. KompasTV
+6. MNCTV
+7. METROTV
+8. NETTV
+9. RCTI
+10. SCTV
+11. RTV
+12. Trans7
+13. TransTV`
 }
 
 exports.textReadme = (pushname) => {
