@@ -1,6 +1,6 @@
 <h1 align="center">
   <br>
-  <a href="https://github.com/TobzCyberTeam/megumikato"><img src="https://raw.githubusercontent.com/TobzCyberTeam/megumikato/master/megumikato.jpg"></a>
+  <a href="https://github.com/ItzTobz/megumikato"><img src="https://raw.githubusercontent.com/ItzTobz/megumikato/master/megumikato.jpg"></a>
   <br>
   MEGUMI KATO
  <br>
@@ -18,7 +18,7 @@ This project require NodeJS v12.
 Clone this project
 
 ```bash
-> git clone https://github.com/TobzCyberTeam/megumikato
+> git clone https://github.com/ItzTobz/megumikato
 > cd imageToSticker
 ```
 
