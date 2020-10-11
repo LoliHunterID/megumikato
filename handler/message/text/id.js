@@ -26,10 +26,10 @@ Hai kak ${pushname}
 
 ┏☾ INFORMATION ☽
 ╿
-┠❥ MEGUMI BOT
+┠❥ PURTA BOT
 ┠❥ 2.0
 ┠❥ CREATOR : TOBZ
-┠❥ wa.me/081311850715
+┠❥ wa.me/6282271071723
 ╿
 ┷┯ ☾ OTHER COMMANDS ☽
    ╽ 
