@@ -1088,8 +1088,8 @@ break
         case 'brainly':
             if (args.length != 1) return client.reply(from, 'Maaf, format pesan salah silahkan periksa menu. [Wrong Format]', id)
             await client.reply(from, '_Scraping Metadata..._ \n\nSupport Bot Kami Agar Tetap Aktif Dengan Cara #donasi', id)
-            const quoteText = quotedMsg.type == 'chat' ? quotedMsg.body : quotedMsg.type == 'image' ? quotedMsg.caption : ''
-            edukasi.brainly(quoteText, args[0]).then(result => {
+            const quoteTeks = quotedMsg.type == 'chat' ? quotedMsg.body : quotedMsg.type == 'image' ? quotedMsg.caption : ''
+            edukasi.brainly(quoteTeks, args[0]).then(result => {
                 let i = 1
                 result.map(({ title, url }) => {
                     jawaban = `${i++}. ${title}\nKlik Disini: ${url}\n`
