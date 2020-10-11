@@ -700,8 +700,6 @@ module.exports = msgHandler = async (client = new Client(), message) => {
             if (!isGroupMsg) return await client.reply(from, 'Perintah ini hanya bisa di gunakan dalam group!', id)
             const isGroupOwner = sender.id === chat.groupMetadata.owner
             if (!isGroupOwner) return await client.reply(from, 'Perintah ini hanya bisa di gunakan oleh Owner group', id)
-            const isLeader = sender.id === chat.groupMetadata.owner
-            if (!isLeader) return client.reply(from, 'Perintah special untuk owner bot', id)
             if (!isBotGroupAdmins) return await client.reply(from, 'Perintah ini hanya bisa di gunakan ketika bot menjadi admin', id)
             const allMem = await client.getGroupMembers(groupId)
             for (let i = 0; i < allMem.length; i++) {
@@ -715,8 +713,6 @@ module.exports = msgHandler = async (client = new Client(), message) => {
             break
         case 'linkgroup':
             if (!isGroupAdmins) return await client.reply(from, 'Gagal, perintah ini hanya dapat digunakan oleh admin grup! [Admin Group Only]', id)
-            const isLeader = sender.id === chat.groupMetadata.owner
-            if (!isLeader) return client.reply(from, 'Perintah special untuk owner bot', id)
             if (!isBotGroupAdmins) return await client.reply(from, 'Gagal, silahkan tambahkan bot sebagai admin grup! [Bot Not Admin]', id)
             if (isGroupMsg) {
                 const inviteLink = await client.getGroupInviteLink(groupId);
@@ -729,8 +725,6 @@ module.exports = msgHandler = async (client = new Client(), message) => {
             if (!isOwner) return client.reply(from, 'Perintah special untuk owner bot', id)
             if (!isGroupMsg) return client.reply(from, 'Maaf, perintah ini hanya dapat dipakai didalam grup! [Group Only]', id)
             if (!isGroupAdmins) return client.reply(from, 'Gagal, perintah ini hanya dapat digunakan oleh admin grup! [Admin Group Only]', id)
-            const isLeader = sender.id === chat.groupMetadata.owner
-            if (!isLeader) return client.reply(from, 'Perintah special untuk owner bot', id)
             if (!isBotGroupAdmins) return client.reply(from, 'Gagal, silahkan tambahkan bot sebagai admin grup! [Bot Not Admin]', id)
             if (mentionedJidList.length === 0) return client.reply(from, 'Maaf, format pesan salah silahkan periksa menu. [Wrong Format]', id)
             if (mentionedJidList[0] === botNumber) return await client.reply(from, 'Maaf, format pesan salah silahkan periksa menu. [Wrong Format]', id)
@@ -742,8 +736,6 @@ module.exports = msgHandler = async (client = new Client(), message) => {
             break
         case 'promote':
             if (!isGroupMsg) return await client.reply(from, 'Maaf, perintah ini hanya dapat dipakai didalam grup! [Group Only]', id)
-            const isLeader = sender.id === chat.groupMetadata.owner
-            if (!isLeader) return client.reply(from, 'Perintah special untuk owner bot', id)
             if (!isGroupAdmins) return await client.reply(from, 'Gagal, perintah ini hanya dapat digunakan oleh admin grup! [Admin Group Only]', id)
             if (!isBotGroupAdmins) return await client.reply(from, 'Gagal, silahkan tambahkan bot sebagai admin grup! [Bot not Admin]', id)
             if (mentionedJidList.length != 1) return client.reply(from, 'Maaf, format pesan salah silahkan periksa menu. [Wrong Format, Only 1 user]', id)
@@ -755,8 +747,6 @@ module.exports = msgHandler = async (client = new Client(), message) => {
         case 'demote':
             if (!isGroupMsg) return client.reply(from, 'Maaf, perintah ini hanya dapat dipakai didalam grup! [Group Only]', id)
             if (!isGroupAdmins) return client.reply(from, 'Gagal, perintah ini hanya dapat digunakan oleh admin grup! [Admin Group Only]', id)
-            const isLeader = sender.id === chat.groupMetadata.owner
-            if (!isLeader) return client.reply(from, 'Perintah special untuk owner bot', id)
             if (!isBotGroupAdmins) return client.reply(from, 'Gagal, silahkan tambahkan bot sebagai admin grup! [Bot not Admin]', id)
             if (mentionedJidList.length !== 1) return client.reply(from, 'Maaf, format pesan salah silahkan periksa menu. [Wrong Format, Only 1 user]', id)
             if (!groupAdmins.includes(mentionedJidList[0])) return await client.reply(from, 'Maaf, user tersebut tidak menjadi admin. [user not Admin]', id)
@@ -782,8 +772,6 @@ module.exports = msgHandler = async (client = new Client(), message) => {
         case 'add':
             if (!isGroupMsg) return client.reply(from, 'Fitur ini hanya bisa di gunakan dalam group', message.id)
             if (args.length == 0) return client.reply(from, 'Untuk menggunakan fitur ini, kirim perintah *#add* 628xxxxx', message.id)
-            const isLeader = sender.id === chat.groupMetadata.owner
-            if (!isLeader) return client.reply(from, 'Perintah special untuk owner bot', message.id)
             if (!isGroupAdmins) return client.reply(from, 'Perintah ini hanya bisa di gunakan oleh admin group', message.id)
             if (!isBotGroupAdmins) return client.reply(from, 'Perintah ini hanya bisa di gunakan ketika bot menjadi admin', message.id)
             try {
@@ -795,8 +783,6 @@ module.exports = msgHandler = async (client = new Client(), message) => {
         case 'bye':
             if (!isGroupMsg) return client.reply(from, 'Maaf, perintah ini hanya dapat dipakai didalam grup! [Group Only]', id)
             if (!isGroupAdmins) return client.reply(from, 'Gagal, perintah ini hanya dapat digunakan oleh admin grup! [Admin Group Only]', id)
-            const isLeader = sender.id === chat.groupMetadata.owner
-            if (!isLeader) return client.reply(from, 'Perintah special untuk owner bot', id)
             client.sendText(from, 'Good bye... ( ⇀‸↼‶ )').then(() => client.leaveGroup(groupId))
             break
         case 'listblock':
@@ -815,8 +801,6 @@ module.exports = msgHandler = async (client = new Client(), message) => {
             break
         case 'tagall':
             if (!isGroupMsg) return client.reply(from, 'Maaf, perintah ini hanya dapat dipakai didalam grup! [Group Only]', id)
-            const isLeader = sender.id === chat.groupMetadata.owner
-            if (!isLeader) return client.reply(from, 'Perintah special untuk owner bot', id)
             if (!isGroupAdmins) return client.reply(from, 'Gagal, perintah ini hanya dapat digunakan oleh admin grup! [Admin Group Only]', id)
             const mentions = mentionList(sender.id, botNumber, groupMembers)
             await client.sendTextWithMentions(from, `Halo para sider, ${pushname} memanggilmu!!!\n${mentions}`)
