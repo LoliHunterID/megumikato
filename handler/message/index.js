@@ -1,4 +1,4 @@
-orequire('dotenv').config()
+require('dotenv').config()
 const { decryptMedia, Client } = require('@open-wa/wa-automate')
 const moment = require('moment-timezone')
 moment.tz.setDefault('Asia/Jakarta').locale('id')
@@ -1089,7 +1089,7 @@ break
             if (args.length != 1) return client.reply(from, 'Maaf, format pesan salah silahkan periksa menu. [Wrong Format]', id)
             await client.reply(from, '_Scraping Metadata..._ \n\nSupport Bot Kami Agar Tetap Aktif Dengan Cara #donasi', id)
             const quoteTeks = quotedMsg.type == 'chat' ? quotedMsg.body : quotedMsg.type == 'image' ? quotedMsg.caption : ''
-            edukasi.brainly(quoteTeks, args[0]).then(result => {
+            edukasi.brainly(quoteTe, args[0]).then(result => {
                 let i = 1
                 result.map(({ title, url }) => {
                     jawaban = `${i++}. ${title}\nKlik Disini: ${url}\n`
